@@ -33,7 +33,7 @@ const Login = () => {
     }
 
     const failedResponse = () =>{
-        window.location.reload()
+        window.alert('Failed to Login. Try again Later')
     }
 
     return (
@@ -61,14 +61,14 @@ const Login = () => {
                             render={(renderProps) => (
                                 <button 
                                     type='button'
-                                    className='bg-mainColor 
+                                    className='bg-green-300 
                                                 flex justify-center
                                                 items-center p-3 rounded-lg 
                                                 cursor-pointer outline-none'
                                     onClick={renderProps.onClick}
                                     disabled = {renderProps.disabled}
                                 > 
-                                    <FcGoogle className='mr-4' /> Login with Google
+                                    <FcGoogle className='mr-4' /> Link Twinkle with Google
                                 </button>
                             )}
                             onSuccess={responseGoogle}
