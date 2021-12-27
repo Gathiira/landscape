@@ -32,6 +32,10 @@ const Login = () => {
         })
     }
 
+    const failedResponse = () =>{
+        window.location.reload()
+    }
+
     return (
         <div className='flex justify-start items-center flex-col h-screen'>
             <div className='relative w-full h-full'>
@@ -68,7 +72,7 @@ const Login = () => {
                                 </button>
                             )}
                             onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
+                            onFailure={failedResponse}
                             cookiePolicy='single_host_origin'
                         />
                     </div>
