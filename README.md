@@ -1,6 +1,6 @@
 ### share your pictures with the world
 
-- [sanity.io](https://sharepic.sanity.studio)
+- [sanity.io](https://frankscaper.sanity.studio/)
 
 #### 
-- [deployed Site](https://sharepic.netlify.app)
+- [deployed Site](https://frankscaper.netlify.app/)
