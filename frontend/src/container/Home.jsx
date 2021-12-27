@@ -39,7 +39,7 @@ const Home = () => {
                         h-screen transition-height 
                         duration-75 ease-out'>
             <div className='sticky hidden md:flex h-screen flex-initial'>
-                <Sidebar key={user?._id} user={user && user} closeToggle={setToggleSidebar} />
+                <Sidebar key={user?._id} user={user && user} closeToggle={setToggleSidebar} className='sticky' />
             </div>
             <div className='flex md:hidden flex-row'>
                 <div className='p-2 w-full flex flex-3 gap-3 items-center shadow-md'>
@@ -64,7 +64,7 @@ const Home = () => {
                                 onClick={()=> setToggleSidebar(false)}
                             />
                         </div>
-                        <Sidebar key={user?._id} user={user && user} closeToggle={setToggleSidebar} />
+                        <Sidebar key={user?._id} user={user && user} closeToggle={setToggleSidebar} className='sticky' />
                     </div>
                 )}
             </div>
