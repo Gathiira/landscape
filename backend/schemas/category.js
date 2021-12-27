@@ -8,5 +8,15 @@ export default {
             title: "Name",
             type: "string",
         },
+        {
+            name: "label",
+            title: "Label",
+            type: "string",
+        },
+        {
+            name: "value",
+            title: "Value",
+            type: "string",
+        },
     ]
 }

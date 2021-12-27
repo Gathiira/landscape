@@ -1,22 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom';
 import {FcHome} from 'react-icons/fc';
 import {IoIosArrowForward} from 'react-icons/io';
 import { FcLandscape } from 'react-icons/fc'
 
 import logo from '../assets/logo.png';
-import { categories } from '../utils/data';
+import { fetchCategories } from '../utils/data';
+import { client } from '../client'
+import { useState } from 'react';
 
 const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize';
 const isActiveStyle  = 'flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize';
 
 
 const Sidebar = ({user, closeToggle}) => {
+    const [category, setCategory] = useState([])
+
     const handleCloseSidebar = () => {
         if (closeToggle) {
             closeToggle(false)
         }
     }
+
+    useEffect(() => {
+        client.fetch(fetchCategories)
+        .then((data)=>{
+            setCategory(data)
+        })
+    }, [])
+
+
+
+
     return (
         <div className='flex flex-col justify-between bg-white h-full 
                         overflow-y-scroll min-w-200 hide-scrollbar'>
@@ -36,17 +51,17 @@ const Sidebar = ({user, closeToggle}) => {
                     >
                         <FcHome />Home
                     </NavLink>
-                    <h3 className='mt-2 px-5 text-bold 2xl:text-xl text-green-400'>Categories</h3>
+                    <h3 className='mt-2 px-5 text-bold 2xl:text-xl text-green-600'>Categories</h3>
                     {
-                        categories.slice(0, categories.length -1).map((category)=>(
+                        category.slice(0, category.length -1).map((category)=>(
                             <NavLink
-                                to={`/category/${category.name}`}
+                                to={`/category/${category.value}`}
                                 className={({isActive})=> isActive ? isActiveStyle : isNotActiveStyle}
                                 onClick={handleCloseSidebar}
-                                key={category.name}
+                                key={category._id}
                             >
                                 <FcLandscape />
-                                {category.name}
+                                {category.label}
                             </NavLink>
                         ))
                     }

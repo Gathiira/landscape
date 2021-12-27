@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AiOutlineCloudUpload} from 'react-icons/ai'
 import { MdDelete } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
 
 import {client } from '../client'
 import Spinner from './Spinner';
-import { categories } from '../utils/data';
+import { fetchCategories } from '../utils/data';
 
 const CreatePin = ({user}) => {
     const [title, setTitle] = useState('')
@@ -17,6 +16,7 @@ const CreatePin = ({user}) => {
     const [category, setCategory] = useState([])
     const [imageAsset, setImageAsset] = useState(null)
     const [wrongImageType, setWrongImageType] = useState(false)
+    const [categories, setCategories] = useState([])
 
     const navigate = useNavigate()
 
@@ -28,6 +28,7 @@ const CreatePin = ({user}) => {
             || type ==='image/gif' 
             || type ==='image/tiff' 
             || type ==='image/jpg' 
+            || type ==='image/webp' 
             ){
                 setWrongImageType(false)
                 setLoading(true);
@@ -88,6 +89,13 @@ const CreatePin = ({user}) => {
         setCategory(category|| [])
     }
 
+    useEffect(() => {
+        client.fetch(fetchCategories)
+        .then((data)=>{
+            setCategories(data)
+        })
+    }, [])
+
 
     return (
         <div className='flex flex-col justify-center items-center mt-5 lg:h-4/5'>
@@ -98,7 +106,7 @@ const CreatePin = ({user}) => {
             )}
             <div className='flex lg:flex-row flex-col 
                             justify-center items-center 
-                            bg-white lg:pd-3 pd-3 lg:w-4/5 w-full'
+                            bg-white lg:pd-3 pd-3 lg:w-5/6 w-full'
             >
                 <div className='bg-secondaryColor p-3 flex flex-0.7 w-full'>
                     <div 
@@ -129,10 +137,10 @@ const CreatePin = ({user}) => {
                                         <p className='font-bold text-2xl'>
                                             <AiOutlineCloudUpload />
                                         </p>
-                                        <p className='text-lg'>Click to Upload</p>
+                                        <p className='text-lg'>{!loading ? "Click to Upload" :"Uploading ..."}</p>
                                     </div>
                                     <p className='mt-20 text-gray-400'>
-                                        Use high Quality JPG, SVG, PNG, or GIF less than 20 MB
+                                        Use high Quality JPG, SVG, PNG, Webp or GIF less than 20 MB
                                     </p>
                                 </div>
                             </label>
@@ -165,45 +173,39 @@ const CreatePin = ({user}) => {
                         type="text"
                         value={title}
                         onChange={(e)=> setTitle(e.target.value)}
-                        placeholder='Add your title here'
+                        placeholder='Add Image title here'
                         className='outline-none text-xl 
                                     sm:text-3xl font-semibold border-b-2 
                                     border-gray-200 p-2'
                     />
-                    <input 
-                        type="text"
+                    <textarea 
+                        name="About" id="" 
                         value={about}
                         onChange={(e)=> setAbout(e.target.value)}
-                        placeholder='Add your description here'
                         className='outline-none text-base 
                                     sm:text-lg border-b-2 
                                     border-gray-200 p-2'
-                    />
-                    <div className='flex flex-col'>
-                        <div>
-                            <p className='mb-2 font-semibold text-lg sm:text-xl'>
-                                Image Category
-                            </p>
-                            <Select 
-                                options={categories}
-                                value={category}
-                                onChange={handleCategory}
-                                className='outline-none w-4/5 text-base  
-                                        border-gray-200 p-2 rounded-md cursor-pointer'
-                                isMulti
-                                makeAnimated
-                            />
-                        </div>
-                        <div className='flex justify-start items-start mt-5'>
-                            <button 
-                                type='button'
-                                className='bg-green-500 text-white font-bold p-2 rounded-lg outline-none'
-                                onClick={savePin}
-                            >
-                                Save Image
-                            </button>
-                        </div>
-                    </div>
+                        cols="30" rows="3" 
+                        placeholder='Add Image description here' />
+
+                    <Select 
+                        options={categories}
+                        value={category}
+                        onChange={handleCategory}
+                        className='outline-none w-full text-base  
+                                border-gray-200 rounded-md cursor-pointer'
+                        isMulti
+                        makeAnimated
+                        placeholder='Select Category' />
+
+                    
+                    <button 
+                        type='button'
+                        className='bg-green-500 text-white font-bold p-2 rounded-lg outline-none'
+                        onClick={savePin}
+                    >
+                        Save Image
+                    </button>
                 </div>
             </div>
         </div>
