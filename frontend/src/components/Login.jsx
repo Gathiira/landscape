@@ -32,7 +32,8 @@ const Login = () => {
         })
     }
 
-    const failedResponse = () =>{
+    const failedResponse = (response) =>{
+        console.log(response);
         window.alert('Failed to Login. Try again Later')
     }
 
