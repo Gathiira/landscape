@@ -10,6 +10,7 @@ import logo from '../assets/logo.png'
 
 import Pins from './Pins'
 import { fetchUser } from '../utils/fetchUser';
+import { IoMdPerson } from 'react-icons/io';
 
 const Home = () => {
     const [toggleSidebar, setToggleSidebar] = useState(false)
@@ -37,18 +38,20 @@ const Home = () => {
                         md:flex-row flex-col 
                         h-screen transition-height 
                         duration-75 ease-out'>
-            <div className='hidden md:flex h-screen flex-initial'>
+            <div className='sticky hidden md:flex h-screen flex-initial'>
                 <Sidebar key={user?._id} user={user && user} closeToggle={setToggleSidebar} />
             </div>
             <div className='flex md:hidden flex-row'>
                 <div className='p-2 w-full flex flex-3 gap-3 items-center shadow-md'>
                     <HiMenu fontSize={40} className='cursor-pointer flex-0' onClick={()=>setToggleSidebar(true)}/>
                     <Link to='/' className='flex-1'>
-                        <img src={logo} alt="logo" className='w-14 h-14 rounded-lg'/>
+                        <img src={logo} alt="logo" className='w-1/4 h-14 rounded-lg'/>
                     </Link>
-                    <Link to={`profile/${user?._id}`}>
-                        <img src={user?.image} alt="profile" className='w-14 h-14 rounded-full'/>
-                    </Link>
+                    {user && (
+                        <Link to={`profile/${user?._id}`}>
+                            <img src={user?.image} alt="profile" className='w-14 h-14 rounded-full'/>
+                        </Link>
+                    )}
                 </div>
                 {toggleSidebar && (
                     <div className='fixed w-2/4 bg-white 
