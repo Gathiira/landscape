@@ -3,6 +3,7 @@ import GoogleLogin from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
 import {FcGoogle} from 'react-icons/fc';
 import {client} from '../client';
+import {v4 as uuidv4} from 'uuid'
 
 import shareVideo from '../assets/share.mp4';
 import shareLogo from '../assets/logowhite.png'
@@ -17,14 +18,17 @@ const Login = () => {
         const { name, googleId, imageUrl} = response.profileObj
 
         const doc = {
-            _id: googleId,
+            _id: googleId ? googleId : uuidv4(),
             _type: 'user',
-            userName: name,
-            image: imageUrl
+            userName: name ? name : "Anonymous",
+            image: imageUrl ? imageUrl :""
         }
         client.createIfNotExists(doc)
         .then(()=>{
             navigate('/', {replace:true})
+        })
+        .catch((error)=>{
+            console.log(error);
         })
     }
 
