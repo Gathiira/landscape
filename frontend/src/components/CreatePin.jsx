@@ -49,7 +49,7 @@ const CreatePin = ({user}) => {
 
     const savePin = () => {
         const _categories = category.map(({ name }) => name);
-        const fieldExist = title && about && imageAsset?._id && category
+        const fieldExist = title && about && imageAsset?._id && _categories
         if(fieldExist){
             setFields(false)
             const doc = {

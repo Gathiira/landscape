@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom';
-import {FcHome} from 'react-icons/fc';
+import {FcHome, FcPlus} from 'react-icons/fc';
 import {IoIosArrowForward} from 'react-icons/io';
 import { FcLandscape } from 'react-icons/fc'
 
@@ -51,9 +51,17 @@ const Sidebar = ({user, closeToggle}) => {
                     >
                         <FcHome />Home
                     </NavLink>
+                    {user && (
+                        <NavLink 
+                            to='/create-category'
+                            className={({isActive})=> isActive ? isActiveStyle : isNotActiveStyle}
+                        >
+                            <FcPlus />Category
+                        </NavLink>
+                    )}
                     <h3 className='mt-2 px-5 text-bold 2xl:text-xl text-green-600'>Categories</h3>
                     {
-                        category.slice(0, category.length -1).map((category)=>(
+                        category.map((category)=>(
                             <NavLink
                                 to={`/category/${category.value}`}
                                 className={({isActive})=> isActive ? isActiveStyle : isNotActiveStyle}
