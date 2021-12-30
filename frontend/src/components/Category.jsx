@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
-import { Spinner } from '.'
 import { client } from '../client'
 import { fetchCategories } from '../utils/data'
 
