@@ -17,6 +17,10 @@ const Pin = ({pin:{postedBy, image, _id, save, category, title}}) => {
 
     const savePin = (id) => {
 
+        if(!user){
+            navigate('/login')
+        }
+
         if(!alreadySaved){
             client
             .patch(id)
@@ -66,7 +70,7 @@ const Pin = ({pin:{postedBy, image, _id, save, category, title}}) => {
                         style={{height:'100%'}}
                     >
                         <div className='flex items-center justify-between'>
-                            <div className='flex gap-2'>
+                            <div className='flex gap-2 items-center'>
                                 <a 
                                     href={`${image?.asset?.url}?dl=`}
                                     download
@@ -78,6 +82,7 @@ const Pin = ({pin:{postedBy, image, _id, save, category, title}}) => {
                                 >
                                     <HiOutlineDownload />
                                 </a>
+                                <p className='text-white text-xl opacity-100'>{title}</p>
                             </div>
                             {alreadySaved ? (
                                 <button

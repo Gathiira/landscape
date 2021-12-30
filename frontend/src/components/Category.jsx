@@ -17,9 +17,9 @@ const Category = () => {
             setLoading(true)
             const doc = {
                 _type: 'category',
-                name: name.toUpperCase(),
-                label: name.toUpperCase(),
-                value: name.toUpperCase()
+                name: name,
+                label: name,
+                value: name
             }
             client.create(doc)
             .then(()=>{
@@ -46,7 +46,6 @@ const Category = () => {
     }
 
     useEffect(() => {
-        console.log('triggered');
         client.fetch(fetchCategories)
         .then((data)=>{
             setCategory(data)
@@ -54,14 +53,14 @@ const Category = () => {
     }, [])
 
     return (
-        <div className='flex flex-col justify-start items-start lg:h-2/5'>
+        <div className='flex flex-col justify-center items-center lg:h-2/5'>
             {fields && (
                 <p className=' text-red-500 mb-5 text-xl translate-all duration-150 ease-in '>
                     Please fill in all the fields
                 </p>
             )}
             <div className='flex flex-col justify-center items-center 
-                            bg-gray-200 lg:pd-3 pd-3 lg:w-5/6 w-full'
+                            bg-gray-200 lg:pd-3 pd-3 lg:w-4/5 w-full'
             >
                 <div className='flex flex-col lg:pl-5 mt-5 w-4/5'>
                     <input 
@@ -69,8 +68,7 @@ const Category = () => {
                         value={name}
                         onChange={(e)=> setName(e.target.value)}
                         placeholder='Add Category Name here'
-                        className='outline-none border-b-2 
-                                    border-gray-200 p-2'
+                        className='outline-none border-b-2 p-2'
                     />
                     <button 
                         type='button'
@@ -82,15 +80,15 @@ const Category = () => {
                     </button>
                 </div>
             </div>
-            <div className='flex flex-col justify-start items-startn gap-3 p-2 w-4/5'>
-                {category?.map((item) =>(
-                    <>
-                        <div key={item._id} className='flex items-center justify-between'>
-                            <li key={item._id}>{item.name}</li>
-                            <AiOutlineDelete onClick={() => deleteCategory(item._id)} />
+            <div className='flex flex-col gap-3 lg:pd-3 pd-3 lg:w-4/5 w-full'>
+                {category?.map((item,i) =>(
+                    <div key={i}>
+                        <div key={i} className='flex items-center justify-between p-2'>
+                            <h5 key={i}>{i+1}. {item.name}</h5>
+                            <AiOutlineDelete onClick={() => deleteCategory(item._id)} className='cursor-pointer text-red-700'/>
                         </div>
                         <hr />
-                    </>
+                    </div>
                 ))}
             </div>
         </div>
