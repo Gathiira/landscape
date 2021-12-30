@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { client, urlFor } from '../client';
 import {pinDetailMorePinQuery, pinDetailQuery } from '../utils/data';
 import { Spinner, MasonryLayout } from '.';
+import { IoMdLogIn } from 'react-icons/io';
 
 const PinDetail = ({user}) => {
     const [pins, setPins] = useState(null)
@@ -135,29 +136,38 @@ const PinDetail = ({user}) => {
                         ))}
                     </div>
                 </div>
-                <div className='flex flex-wrap items-center mt-6 gap-3'>
-                    <img 
-                        className='w-8 h-8 rounded-full object-cover'
-                        src={user?.image} 
-                        alt="profile" 
-                    />
-                    <input type="text" 
-                        className='flex-1 border-gray-100 
-                                    outline-none border-2 p-2 rounded-xl 
-                                    focus:border-gray-300'
-                        placeholder='Add a Comment'
-                        value={comment}
-                        onChange={(e)=> setComment(e.target.value)}
-                    />
-                    <button 
-                        className='bg-green-500 text-white 
-                                        rounded-xl px-6 py-2 fond-semibold 
-                                        text-base outline-none'
-                        onClick={addComment}
-                    >
-                        {addingComment ? "Posting":"Post"}
-                    </button>
-                </div>
+                {user ? (
+                    <div className='flex flex-wrap items-center mt-6 gap-3'>
+                        <img 
+                            className='w-8 h-8 rounded-full object-cover'
+                            src={user?.image} 
+                            alt="profile" 
+                        />
+                        <input type="text" 
+                            className='flex-1 border-gray-100 
+                                        outline-none border-2 p-2 rounded-xl 
+                                        focus:border-gray-300'
+                            placeholder='Add a Comment'
+                            value={comment}
+                            onChange={(e)=> setComment(e.target.value)}
+                        />
+                        <button 
+                            className='bg-green-500 text-white 
+                                            rounded-xl px-6 py-2 fond-semibold 
+                                            text-base outline-none'
+                            onClick={addComment}
+                        >
+                            {addingComment ? "Posting":"Post"}
+                        </button>
+                    </div>
+                ):(
+                    <div className='flex flex-wrap items-center mt-6 gap-3'>
+                        <IoMdLogIn />
+                        <Link to='/login' className='text-blue-500'> Login to comment
+                        </Link>
+                    </div>
+                )}
+                
             </div>
         </div>
 

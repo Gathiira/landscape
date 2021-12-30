@@ -54,7 +54,10 @@ const Login = () => {
                                 top-0 right-0 left-0 bottom-0 
                                 bg-blackOverlay'>
                     <div className='p-5'>  
-                        <img src={shareLogo} alt="logo"  width='130px'/>
+                        <img src={shareLogo} alt="logo"  width='130px' 
+                            onClick={()=> navigate('/')}
+                            className='cursor-pointer'
+                        />
                     </div>
                     <div className='shadow-2xl'>
                         <GoogleLogin
@@ -76,6 +79,15 @@ const Login = () => {
                             onFailure={failedResponse}
                             cookiePolicy='single_host_origin'
                         />
+                    </div>
+                    <div className='p-2'>  
+                        <p 
+                            className='text-green-700 rounded-lg 
+                                        cursor-pointer outline-none'
+                            onClick={()=> navigate('/')}
+                        > 
+                            Explore Images Instead
+                        </p>
                     </div>
                 </div>
             </div>

@@ -53,6 +53,7 @@ const Sidebar = ({user, closeToggle}) => {
                         <NavLink 
                             to='/create-category'
                             className={({isActive})=> isActive ? isActiveStyle : isNotActiveStyle}
+                            onClick={handleCloseSidebar}
                         >
                             <FcPlus />Category
                         </NavLink>

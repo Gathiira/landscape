@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 import { client } from '../client'
 import { fetchCategories } from '../utils/data'
 
-const Category = () => {
+const Category = ({user}) => {
     const [fields, setFields] = useState(null)
     const [name, setName] = useState('')
     const [category, setCategory] = useState([])
     const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate();
 
 
     const saveCategory = () => {
@@ -50,6 +53,10 @@ const Category = () => {
             setCategory(data)
         })
     }, [])
+
+    if(!user) {
+        navigate('/')
+    }
 
     return (
         <div className='flex flex-col justify-center items-center lg:h-2/5'>
