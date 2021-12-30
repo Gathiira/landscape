@@ -1,6 +1,6 @@
-### share your pictures with the world
+### landscaping image gallery
 
 - [sanity.io](https://frankscaper.sanity.studio/)
 
 #### 
-- [deployed Site](https://frankscaper.netlify.app/)
+- [deployed Site](https://twinklescapers.netlify.app/)

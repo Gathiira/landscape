@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom';
 import {FcHome, FcPlus} from 'react-icons/fc';
-import {IoIosArrowForward} from 'react-icons/io';
+import {IoIosArrowForward, IoMdLogIn} from 'react-icons/io';
 import { FcLandscape } from 'react-icons/fc'
 
 import logo from '../assets/logo.png';
@@ -30,8 +30,6 @@ const Sidebar = ({user, closeToggle}) => {
     }, [])
 
 
-
-
     return (
         <div className='sticky flex flex-col justify-between bg-white h-full 
                         overflow-y-scroll min-w-200 hide-scrollbar'>
@@ -51,7 +49,7 @@ const Sidebar = ({user, closeToggle}) => {
                     >
                         <FcHome />Home
                     </NavLink>
-                    {user && (
+                    {user && user.isAdmin && (
                         <NavLink 
                             to='/create-category'
                             className={({isActive})=> isActive ? isActiveStyle : isNotActiveStyle}
@@ -75,7 +73,7 @@ const Sidebar = ({user, closeToggle}) => {
                     }
                 </div>
             </div>
-            { user && (
+            { user ? (
                 <Link
                     to={`profile/${user._id}`}
                     className='flex my-5 mx-3 mb-3 p-2 gap-2 items-center bg-white rounded-lg shadow-lg' 
@@ -83,6 +81,16 @@ const Sidebar = ({user, closeToggle}) => {
                 >
                     <img src={user.image} alt="profile" className='w-8 h-8 rounded-full' />
                     <p>{user.userName}</p>
+                    <IoIosArrowForward />
+                </Link>
+            ) :(
+                <Link
+                    to='/login'
+                    className='flex my-5 mx-3 mb-3 p-2 gap-2 items-center bg-white rounded-lg shadow-lg' 
+                    onClick={handleCloseSidebar}
+                >
+                    <IoMdLogIn />
+                    Login
                     <IoIosArrowForward />
                 </Link>
             )}
