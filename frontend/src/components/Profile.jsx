@@ -92,6 +92,20 @@ const Profile = () => {
                             )}
                         </div>
                     </div>
+
+                    {user.email && user.phonenumber && (
+                        <div className=' flex flex-col text-center gap-2 mt-3'>
+                            <address>
+                                <a href={`mailto:${user.email}`} 
+                                    className='lg:text-xl text-blue-600 decoration-none'
+                                >
+                                    {user.email}
+                                </a>
+                                <h3 className='lg:text-xl'>{user.phonenumber}</h3>
+                            </address>
+                        </div>
+                    )}
+                
                     <div className='text-center mb-7 mt-5'>
                         <button
                             type='button'

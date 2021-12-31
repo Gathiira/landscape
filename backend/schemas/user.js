@@ -9,6 +9,18 @@ export default {
             type:'string',
         },
         {
+            name:'phonenumber',
+            title:'Phonenumber',
+            type:'string',
+            initialValue: null
+        },
+        {
+            name:'email',
+            title:'Email',
+            type:'string',
+            initialValue: null
+        },
+        {
             name:'image',
             title:'Image',
             type:'string',
